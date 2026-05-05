@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coreb"
+version = "0.1.0"
+description = "CoREB: Code Retrieval and Reranking Benchmark — a graded-relevance benchmark for code retrieval and reranking models"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.9"
+authors = [
+    {name = "CoREB Team"},
+]
+keywords = ["code retrieval", "embedding", "benchmark", "code search", "information retrieval"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "datasets>=2.14.0",
+    "numpy>=1.24.0",
+    "torch>=2.0.0",
+    "pytrec-eval-terrier>=0.5.5",
+    "tqdm>=4.60.0",
+    "easyllm_kit>=0.0.9",
+]
+
+[project.optional-dependencies]
+hf = ["transformers>=4.30.0"]
+gemini = ["google-genai>=1.0.0"]
+all = [
+    "transformers>=4.30.0",
+    "google-genai>=1.0.0",
+    "sentence-transformers>=2.2.0",
+    "scikit-learn>=1.0.0",
+    "pandas>=1.5.0",
+    "omegaconf>=2.3.0",
+]
+dev = [
+    "pytest>=7.0",
+    "build>=1.0",
+    "twine>=4.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/hq-bench/coreb"
+Documentation = "https://github.com/hq-bench/coreb"
+Repository = "https://github.com/hq-bench/coreb"
+Dataset = "https://huggingface.co/datasets/hq-bench/coreb"
+
+[tool.setuptools.packages.find]
+include = ["coreb_runner*"]
+
+[tool.setuptools.package-data]
+coreb_runner = ["py.typed"]
