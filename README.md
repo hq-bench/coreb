@@ -4,6 +4,7 @@
 [![Downloads](https://img.shields.io/pypi/dm/coreb)](https://pypi.org/project/coreb/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![Dataset](https://img.shields.io/badge/HuggingFace-hq--bench%2Fcoreb-yellow)](https://huggingface.co/datasets/hq-bench/coreb)
+[![arXiv](https://img.shields.io/badge/arXiv-2605.04615-b31b1b)](https://arxiv.org/abs/2605.04615)
 
 **CoREB** is a graded-relevance benchmark for evaluating code retrieval and reranking models across three tasks:
 
@@ -127,9 +128,26 @@ Available on HuggingFace: [`hq-bench/coreb`](https://huggingface.co/datasets/hq-
 | 10 | F2LLM-0.6B | 0.439 | 0.344 | 0.334 | 0.641 |
 | 11 | Qwen3-Emb-8B | 0.428 | 0.328 | 0.320 | 0.635 |
 
+## Tutorials
+
+Interactive Colab notebooks to get started:
+
+| Notebook | Description |
+|----------|-------------|
+| [01 — Download & Analyze Data](notebooks/01_download_and_analyze_data.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hq-bench/coreb/blob/main/notebooks/01_download_and_analyze_data.ipynb) | Load the dataset from HuggingFace, explore corpus/queries/qrels, and analyze statistics |
+| [02 — Run Evaluation](notebooks/02_run_evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hq-bench/coreb/blob/main/notebooks/02_run_evaluation.ipynb) | Run dense retrieval with HuggingFace/Gemini models and evaluate with graded-relevance metrics |
+
 ## Citation
 
-Coming soon.
+```bibtex
+@article{xue2025coreb,
+  title   = {Beyond Retrieval: A Multitask Benchmark and Model for Code Search},
+  author  = {Xue, Siqiao and Liao, Zihan and Qin, Jin and Zhang, Ziyin and Mu, Yixiang and Zhou, Fan and Yu, Hang},
+  journal = {arXiv preprint arXiv:2605.04615},
+  year    = {2025},
+  url     = {https://arxiv.org/abs/2605.04615}
+}
+```
 
 ## License
 
