@@ -4,6 +4,7 @@
 [![Downloads](https://img.shields.io/pypi/dm/coreb)](https://pypi.org/project/coreb/)
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![Dataset](https://img.shields.io/badge/HuggingFace-hq--bench%2Fcoreb-yellow)](https://huggingface.co/datasets/hq-bench/coreb)
+[![Reranker](https://img.shields.io/badge/HuggingFace-coreb--code--reranker-yellow)](https://huggingface.co/hq-bench/coreb-code-reranker)
 [![arXiv](https://img.shields.io/badge/arXiv-2605.04615-b31b1b)](https://arxiv.org/abs/2605.04615)
 
 **CoREB** is a graded-relevance benchmark for evaluating code retrieval and reranking models across three tasks:
@@ -19,6 +20,7 @@
 - **Graded relevance**: 3-level qrel scheme (rel=2: positive, rel=1: hard negative, rel=0: irrelevant) — hard negatives are same-problem distractors that penalize nDCG when retrieved above true positives
 - **5 programming languages**: Python, C++, Java, Go, Ruby
 - **Problem-disjoint train/test splits**: v202602 (training) and v202603 (testing) cover non-overlapping contest windows
+- **Two-stage evaluation**: benchmarks both retrieval (embedding models) and reranking (cross-encoders)
 - **Drop-in evaluation**: compatible with standard IR evaluation (pytrec\_eval) with `relevance_level=2`
 
 ## Installation
@@ -128,6 +130,16 @@ Available on HuggingFace: [`hq-bench/coreb`](https://huggingface.co/datasets/hq-
 | 10 | F2LLM-0.6B | 0.439 | 0.344 | 0.334 | 0.641 |
 | 11 | Qwen3-Emb-8B | 0.428 | 0.328 | 0.320 | 0.635 |
 
+## CoREB-Reranker
+
+[`hq-bench/coreb-code-reranker`](https://huggingface.co/hq-bench/coreb-code-reranker) is a code reranker fine-tuned from Qwen3-Reranker-4B via LoRA. It is the first reranker to achieve consistent gains across all three code search tasks.
+
+**Reranking delta (nDCG@10 %):**
+
+| Reranker | T2C | C2C | C2T |
+|----------|-----|-----|-----|
+| **CoREB-Reranker** | **+1.1** | **+5.1** | **+0.8** |
+
 ## Tutorials
 
 Interactive Colab notebooks to get started:
@@ -135,7 +147,7 @@ Interactive Colab notebooks to get started:
 | Notebook | Description |
 |----------|-------------|
 | [01 — Download & Analyze Data](notebooks/01_download_and_analyze_data.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hq-bench/coreb/blob/main/notebooks/01_download_and_analyze_data.ipynb) | Load the dataset from HuggingFace, explore corpus/queries/qrels, and analyze statistics |
-| [02 — Run Evaluation](notebooks/02_run_evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hq-bench/coreb/blob/main/notebooks/02_run_evaluation.ipynb) | Run dense retrieval with HuggingFace/Gemini models and evaluate with graded-relevance metrics |
+| [02 — Run Evaluation](notebooks/02_run_evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/hq-bench/coreb/blob/main/notebooks/02_run_evaluation.ipynb) | Two-stage evaluation: dense retrieval + reranking with CoREB-Reranker |
 
 ## Citation
 
