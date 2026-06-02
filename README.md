@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue)](LICENSE)
 [![Dataset](https://img.shields.io/badge/HuggingFace-hq--bench%2Fcoreb-yellow)](https://huggingface.co/datasets/hq-bench/coreb)
 [![Reranker](https://img.shields.io/badge/HuggingFace-coreb--code--reranker-yellow)](https://huggingface.co/hq-bench/coreb-code-reranker)
+[![Reranker Data](https://img.shields.io/badge/HuggingFace-reranker--train--test--dataset-yellow)](https://huggingface.co/datasets/hq-bench/coreb-code-reranker-train-test-dataset)
 [![arXiv](https://img.shields.io/badge/arXiv-2605.04615-b31b1b)](https://arxiv.org/abs/2605.04615)
 
 **CoREB** is a graded-relevance benchmark for evaluating code retrieval and reranking models across three tasks:
@@ -14,6 +15,16 @@
 | **Text-to-Code** (T2C) | Natural language description | Code solution | "Find the longest substring without repeating characters" → Python solution |
 | **Code-to-Code** (C2C) | Code in language A | Equivalent code in language B | Python solution → Java translation |
 | **Code-to-Text** (C2T) | Code snippet | Problem description | Python solution → problem statement |
+
+## MTEB Integration
+
+CoREB is available as a domain-specific benchmark on the [MTEB Leaderboard](https://huggingface.co/spaces/mteb/leaderboard). You can also load and run it directly via the [mteb](https://github.com/embeddings-benchmark/mteb) Python package:
+
+```python
+import mteb
+
+benchmark = mteb.get_benchmark("CoREB")
+```
 
 ## Key Features
 
@@ -139,6 +150,25 @@ Available on HuggingFace: [`hq-bench/coreb`](https://huggingface.co/datasets/hq-
 | Reranker | T2C | C2C | C2T |
 |----------|-----|-----|-----|
 | **CoREB-Reranker** | **+1.1** | **+5.1** | **+0.8** |
+
+Training and test data: [`hq-bench/coreb-code-reranker-train-test-dataset`](https://huggingface.co/datasets/hq-bench/coreb-code-reranker-train-test-dataset)
+
+| Split | Records | T2C | C2T | C2C | Source |
+|-------|---------|-----|-----|-----|--------|
+| train | 4,173 | 2,742 | 1,064 | 367 | v202602 |
+| test | 3,882 | 2,249 | 1,010 | 623 | v202603 |
+
+Each record contains a query, one positive, up to 16 hard negatives (rel=1), and easy negatives sampled from the corpus. Train/test splits are problem-disjoint.
+
+```python
+from datasets import load_dataset
+
+train = load_dataset("hq-bench/coreb-code-reranker-train-test-dataset", split="train")
+test = load_dataset("hq-bench/coreb-code-reranker-train-test-dataset", split="test")
+
+# Filter by task
+t2c_train = train.filter(lambda x: x["task"] == "text2code")
+```
 
 ## Tutorials
 
